@@ -13,6 +13,11 @@ jobs:
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v2
 
+      - name: Clean previous builds
+        shell: pwsh
+        run: |
+          Get-ChildItem -Path . -Include bin,obj -Recurse | Remove-Item -Recurse -Force
+
       - name: Create self-signed certificate
         shell: pwsh
         run: |
@@ -42,7 +47,8 @@ jobs:
             /p:PackageCertificateThumbprint=$env:THUMB `
             /p:AppxPackageDir=..\AppPackages\ `
             /p:CopyBuildOutputToOutputDirectory=true `
-            /p:CopyOutputSymbolsToOutputDirectory=true
+            /p:CopyOutputSymbolsToOutputDirectory=true `
+            /p:OutDir=..\bin\x64\Release\
 
       - name: Collect artifacts
         shell: pwsh
