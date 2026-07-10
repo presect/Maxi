@@ -29,16 +29,20 @@ jobs:
         run: msbuild MaxiCoastRush\MaxiCoastRush.csproj /t:Restore /p:Configuration=Release /p:Platform=x64
 
       - name: Build + package (Release x64, sideloading)
-        run: >
-          msbuild MaxiCoastRush\MaxiCoastRush.csproj
-          /p:Configuration=Release /p:Platform=x64
-          /p:UapAppxPackageBuildMode=SideloadOnly
-          /p:AppxBundle=Never
-          /p:AppxPackageSigningEnabled=true
-          /p:PackageCertificateKeyFile=cert.pfx
-          /p:PackageCertificatePassword=booth
-          /p:PackageCertificateThumbprint=$env:THUMB
-          /p:AppxPackageDir=..\AppPackages\
+        shell: pwsh
+        run: |
+          msbuild MaxiCoastRush\MaxiCoastRush.csproj `
+            /p:Configuration=Release `
+            /p:Platform=x64 `
+            /p:UapAppxPackageBuildMode=SideloadOnly `
+            /p:AppxBundle=Never `
+            /p:AppxPackageSigningEnabled=true `
+            /p:PackageCertificateKeyFile=cert.pfx `
+            /p:PackageCertificatePassword=booth `
+            /p:PackageCertificateThumbprint=$env:THUMB `
+            /p:AppxPackageDir=..\AppPackages\ `
+            /p:CopyBuildOutputToOutputDirectory=true `
+            /p:CopyOutputSymbolsToOutputDirectory=true
 
       - name: Collect artifacts
         shell: pwsh
