@@ -1,0 +1,9 @@
+<Page x:Class="MaxiCoastRush.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    Background="#06131a">
+  <Grid>
+    <muxc:WebView2 x:Name="Web" DefaultBackgroundColor="#06131a"/>
+  </Grid>
+</Page>
