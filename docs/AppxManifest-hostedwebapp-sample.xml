@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  REFERENCE: canonical "Hosted Web App" (WWA) manifest - the classic
+  zero-code way to wrap an HTTPS URL as a true UWP app (no .exe at all;
+  the system's wwahost renders StartPage). Included for completeness
+  because it's the textbook answer to "UWP JavaScript template".
+
+  WARNING for THIS game: wwahost uses the legacy EdgeHTML engine, which
+  has NO WebGL2 - and the game's three.js r158 requires WebGL2. So this
+  route installs and launches fine on Xbox but the game itself won't
+  render. Use PWABuilder (Route A) or the WebView2 UWP project
+  (Route B) instead - both are Chromium. Kept here as reference only.
+-->
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+         IgnorableNamespaces="uap">
+  <Identity Name="Maxi.CoastRush" Publisher="CN=MaxiBooth" Version="1.0.0.0" />
+  <Properties>
+    <DisplayName>Maxi Coast Rush</DisplayName>
+    <PublisherDisplayName>Maxi</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.22621.0" />
+    <TargetDeviceFamily Name="Windows.Xbox"      MinVersion="10.0.17763.0" MaxVersionTested="10.0.22621.0" />
+  </Dependencies>
+  <Resources><Resource Language="en-us"/></Resources>
+  <Applications>
+    <!-- No Executable/EntryPoint: StartPage makes this a hosted web app -->
+    <Application Id="App" StartPage="https://YOUR-CPANEL-DOMAIN.com/game/index.html">
+      <uap:VisualElements DisplayName="Maxi Coast Rush" Description="2-player couch racing"
+        BackgroundColor="#06131a"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#06131a"/>
+      </uap:VisualElements>
+      <uap:ApplicationContentUriRules>
+        <uap:Rule Type="include" Match="https://YOUR-CPANEL-DOMAIN.com/" WindowsRuntimeAccess="none"/>
+      </uap:ApplicationContentUriRules>
+    </Application>
+  </Applications>
+  <Capabilities><Capability Name="internetClient"/></Capabilities>
+</Package>
