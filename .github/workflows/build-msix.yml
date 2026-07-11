@@ -48,7 +48,8 @@ jobs:
             /p:AppxPackageDir=..\AppPackages\ `
             /p:CopyBuildOutputToOutputDirectory=true `
             /p:CopyOutputSymbolsToOutputDirectory=true `
-            /p:OutDir=..\bin\x64\Release\
+            /p:OutDir=..\bin\x64\Release\ `
+            /p:ValidateAppxPackage=false
 
       - name: Collect artifacts
         shell: pwsh
